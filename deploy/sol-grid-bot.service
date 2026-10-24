@@ -1,0 +1,23 @@
+[Unit]
+Description=SOL/USDC Grid Trading Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=gridbot
+# .env wird aus dem WorkingDirectory geladen
+WorkingDirectory=/opt/sol-grid-bot
+ExecStart=/opt/sol-grid-bot/sol-grid-bot
+Restart=always
+RestartSec=5
+# SIGTERM → Bot schickt Abschluss-Report an Discord und beendet sich sauber
+KillSignal=SIGTERM
+TimeoutStopSec=30
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
